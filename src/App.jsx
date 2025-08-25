@@ -1,20 +1,22 @@
-import { contents } from "./assets/data/data";
-import Content from "./components/Content";
 import Header from "./components/Header";
+import Menu from "./components/Menu";
+import Cart from "./components/Cart";
+import { CartProvider } from "./context/cartContext";
+import { MenuProvider } from "./context/menuContext";
 
 function App() {
   return (
-    <main className="min-h-screen bg-gray-100">
-      {/* 헤더 */}
-      <Header />
-
-      {/* 메인 콘텐츠 섹션 */}
-      <section className="flex flex-wrap justify-center gap-6 p-6 md:p-10">
-        {contents.map((el) => (
-          <Content key={el.id} content={el} />
-        ))}
-      </section>
-    </main>
+    <MenuProvider>
+      <CartProvider>
+        <div className="min-h-screen bg-gray-100">
+          <Header />
+          <main className="p-6 md:p-10">
+            <Menu />
+            <Cart />
+          </main>
+        </div>
+      </CartProvider>
+    </MenuProvider>
   );
 }
 
